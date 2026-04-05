@@ -63,6 +63,7 @@ public class Book {
         if(!isAvailable) {
             throw new IllegalStateException("Book is already borrowed.");
         }
+        isAvailable = false;
     }
 
     public void returnBook(){

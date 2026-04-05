@@ -65,4 +65,18 @@ public class Reader {
     public void setNumberBorrowedBooks(int numberBorrowedBooks) {
         this.numberBorrowedBooks = numberBorrowedBooks;
     }
+
+    public void showDetails(){
+        System.out.println("Name: " + name);
+        System.out.println("Last name: " + lastName);
+        System.out.println("Card number: " + cardNumber);
+        System.out.println("Number of borrowed books: " + numberBorrowedBooks);
+    }
+
+    public void increaseNumberBorrowedBooks(){
+        numberBorrowedBooks++;
+    }
+    public void decreaseNumberBorrowedBooks(){
+        numberBorrowedBooks--;
+    }
 }

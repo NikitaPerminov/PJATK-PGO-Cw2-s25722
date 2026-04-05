@@ -1,41 +1,79 @@
-import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Library {
 
-    private Book[] books;
-    private int numberOfBooks;
+    private ArrayList<Book> books;
 
-    public Library(int MaxSize){
-        books = new Book[MaxSize];
+    public Library(){
+        books = new ArrayList<>();
     }
+
     public void addBook(Book book){
-        books[numberOfBooks] = book;
-        numberOfBooks++;
+        books.add(book);
     }
 
-    public void showavailableBooks(){
-        for(int i = 0; i < numberOfBooks; i++){
-            if(books[i].isAvailable()){
-                books[i].showDetails();
+    public Book findBookByTitle(String title) {
+        for (int i = 0; i < books.size(); i++) {
+            if (books.get(i).getTitle().equalsIgnoreCase(title)) {
+                return books.get(i);
+            }
+        }
+        throw new IllegalArgumentException("Book with title \"" + title + "\" was not found.");
+    }
+
+    public void findBookTitle(String title) {
+        Book foundBook = findBookByTitle(title);
+
+        if (foundBook != null) {
+            foundBook.showDetails();
+        } else {
+            System.out.println("Book with title \"" + title + "\" was not found.");
+        }
+    }
+
+    public void borrowBook(String title, Reader reader) {
+        Book foundBook = findBookByTitle(title);
+
+        if (foundBook == null) {
+            System.out.println("Book with title \"" + title + "\" was not found.");
+            return;
+        }
+
+        if (!foundBook.isAvailable()) {
+            System.out.println("Book \"" + title + "\" is already borrowed.");
+            return;
+        }
+
+        foundBook.borrowBook();
+        System.out.println("Book \"" + title + "\" has been borrowed by reader: " + reader.getName() + " " +reader.getLastName());
+    }
+
+    public void returnBook(String title, Reader reader) {
+        Book foundBook = findBookByTitle(title);
+
+        if (foundBook == null) {
+            System.out.println("Book with title \"" + title + "\" was not found.");
+            return;
+        }
+
+        foundBook.returnBook();
+        System.out.println("Book \"" + title + "\" has been returned by reader: " + reader.getName() + " " + reader.getLastName());
+    }
+
+    public void showAvailableBooks(){
+        for(int i = 0; i < books.size(); i++){
+            if(books.get(i).isAvailable()){
+                System.out.println("Title: " + books.get(i).getTitle());
+                System.out.println("Author: " + books.get(i).getAuthor());
+                System.out.println("-----------------------");
             }
         }
     }
 
-    public void findBookbyTitle(String title){
-        Scanner findbyTitle = new Scanner(System.in);
-        System.out.println("Enter the title of the book you want to find: ");
-        title = findbyTitle.nextLine();
-        for(int i = 0; i < numberOfBooks; i++){
-            if(books[i].getTitle().equals(title)){
-                books[i].showDetails();
-            }
-        }
-    }
-
-    public void countavailableBooks(){
+    public void countAvailableBooks(){
         int count = 0;
-        for(int i = 0; i < numberOfBooks; i++){
-            if(books[i].isAvailable()){
+        for(int i = 0; i < books.size(); i++){
+            if(books.get(i).isAvailable()){
                 count++;
             }
         }
