@@ -7,24 +7,16 @@ public class Main {
     public static void main(String[] args){
 
     Book book = new Book("The Hobbit", "Nikita P", 78, true);
+    Book book2 = new Book("The Lord of the Rings", "J.R.R. Tolkien", 100, false);
+    Book book3 = new Book("The Hunger Games", "Suzanne Collins", 300, true);
 
-    book.showDetails();
-    book.borrowBook();
+    Reader reader = new Reader("John", "Doe", "1234567890123456", 2);
+    Reader reader2 = new Reader("Jane", "Doe", "0987654321098765", 3);
 
-    System.out.println("Book borrowed.");
-    System.out.println("Thank you for using our service.");
-        System.out.println("\t");
 
-    book.setAvailable(!book.isAvailable());
-    book.showDetails();
-        System.out.println("\t");
+        System.out.println(book3.getTitle());
+        System.out.println(reader2.getCardNumber());
 
-    //book.borrowBook();
-
-    book.returnBook();
-    book.showDetails();
-    System.out.println("Book returned.");
-    System.out.println("Thank you for using our service.");
 
     }
 
